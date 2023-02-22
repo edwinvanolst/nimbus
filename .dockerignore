@@ -1,0 +1,13 @@
+.eslintignore
+.eslintrc.cjs
+.git
+.gitignore
+.env*
+.nmprc
+.prettierignore
+.prettierrc
+.svelte-kit
+build
+Dockerfile
+node_modules
+README.md

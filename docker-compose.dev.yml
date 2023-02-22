@@ -1,0 +1,14 @@
+services:
+  postgres_dev:
+    container_name: nimbusdev
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-nimbus}
+      POSTGRES_PASSWORD: ${DB_PASS:-secret}
+    ports:
+      - '${DEV_DB_PORT:-7778}:5432'
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/schema.sql
+networks:
+  default:
+    name: nimbus

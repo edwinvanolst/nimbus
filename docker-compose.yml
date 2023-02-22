@@ -1,0 +1,23 @@
+services:
+  node:
+    build: .
+    container_name: nimbus
+    environment:
+      DB_USER: ${DB_USER:-nimbus}
+      DB_PASS: ${DB_PASS:-secret}
+    image: nimbus
+    ports:
+      - '${APP_PORT:-7777}:3000'
+    restart: unless-stopped
+  postgres:
+    container_name: nimbusdb
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: ${DB_USER:-nimbus}
+      POSTGRES_PASSWORD: ${DB_PASS:-secret}
+    restart: unless-stopped
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/schema.sql
+networks:
+  default:
+    name: nimbus
